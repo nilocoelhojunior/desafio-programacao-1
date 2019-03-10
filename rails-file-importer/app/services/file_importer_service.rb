@@ -5,8 +5,9 @@ require 'csv'
 module FileImporterService
   class << self
 
-    def importer(params)
+    def importer(params, user)
       @file = params[:file]
+      @user = user
       archives = []
       CSV.foreach(@file.path, headers: true, col_sep: "\t") do |row|
         archives << Archive.new(parse(row))
@@ -29,6 +30,7 @@ module FileImporterService
                 end
         values[key] = value
       end
+      values[:user] = @user
       values
     end
 

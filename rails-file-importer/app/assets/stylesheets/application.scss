@@ -13,3 +13,17 @@
  */
 
 @import "bootstrap";
+@import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.default-bg {
+  background-image: image-url("funky-lines.png");
+}
+
+$custom-file-text: (en: "Browse",
+ptBr: "Procurar"
+);

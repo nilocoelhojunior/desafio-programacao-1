@@ -1,29 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<%= form_with(model: archive, local: true) do |form| %>
-  <% if archive.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(archive.errors.count, "error") %> prohibited this archive from being saved:</h2>
-
-      <ul>
-      <% archive.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="row justify-content-center mt-5">
+  <div class="col-7">
+    <p>
+      O documente deve ter as colunas separadas por TAB com as seguintes colunas: purchaser name, item description, item price, purchase count, merchant address, merchant name. As colunas devem sempre estar nesta ordem, sempre com dados e que sempre deve haver uma linha de cabeçalho.
+      <br>
+      <strong>
+        Veja o arquivo de exemplo:
+        <a href="https://raw.githubusercontent.com/myfreecomm/desafio-programacao-1/master/example_input.tab" target="_blank">Arquivo de exemplo</a>
+      </strong>
+    </p>
+  </div>
+  <div class="col-5">
+    <% if alert %>
+      <%= render 'shared/alert', alert_type: 'danger' do %>
+        <%= alert %>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <%= form_with(model: archive, local: true) do |form| %>
+      <% if archive.errors.any? %>
+        <%= render 'shared/alert', alert_type: 'danger' do %>
+          <h5><%= pluralize(archive.errors.count, "error") %> proibiram o arquivo de ser importado:</h5>
 
-  <div class="field">
-    <%= form.label "Arquivo" %>
-    <%= form.file_field :file %>
-  </div>
+          <ul>
+            <% archive.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="field form-group custom-file">
+        <%= form.label "Escolher documento", class: 'custom-file-label', for: 'customFile' %>
+        <%= form.file_field :file, class: 'custom-file-input', id: 'customFile' %>
+      </div>
+
+      <div class="actions mt-4">
+        <button class="btn btn-primary btn-block" type="submit" role="button">
+          Importar <span class="fa fa-upload"></span>
+        </button>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

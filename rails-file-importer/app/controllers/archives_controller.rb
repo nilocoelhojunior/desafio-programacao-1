@@ -2,12 +2,18 @@
 
 class ArchivesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_archive, only: %i[show edit update destroy]
 
   # GET /archives
   # GET /archives.json
   def index
-    @archives = Archive.all
+    all = current_user.archives.all
+    @archives = current_user.archives.paginate(page: params[:page])
+    @items = all.sum(:purchase_count)
+    @purchasers = all.count
+    @gross = all.sum('item_price*purchase_count')
+    @count = all.count
   end
 
   # GET /archives/1
@@ -23,17 +29,23 @@ class ArchivesController < ApplicationController
   def edit; end
 
   # POST /archives
-  # POST /archives.json
   def create
-    archives = FileImporterService.importer(archive_params)
+    archives = FileImporterService.importer(archive_params, current_user)
     result = Archive.import(archives)
     respond_to do |format|
       if result.failed_instances.empty?
         format.html { redirect_to archives_path, notice: 'Archive was successfully created.' }
       else
         @archive = result.failed_instances.first
+        @archive.validate
         format.html { render :new }
       end
+    end
+  rescue ActiveModel::UnknownAttributeError => error
+    respond_to do |format|
+      @archive = Archive.new
+      flash[:alert] = 'Verifique o arquivo e tente novamente'
+      format.html { render :new }
     end
   end
 
