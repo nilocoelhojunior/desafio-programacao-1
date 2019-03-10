@@ -1,0 +1,13 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.tabSize": 2,
+  "editor.rulers": [90],
+  "ruby.rubocop.executePath": "/Users/nilocoelhojunior/.rvm/gems/ruby-2.5.3/wrappers/",
+  "ruby.rubocop.configFilePath": "/Users/nilocoelhojunior/Documents/Dev/imprima/.rubocop.yml",
+  "ruby.rubocop.onSave": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveTimeout": 5000,
+  "files.trimTrailingWhitespace": true,
+  "editor.wordWrap": "on"
+}
