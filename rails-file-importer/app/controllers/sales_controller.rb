@@ -10,14 +10,14 @@ class SalesController < ApplicationController
     all = current_user.sales.all
     @sales = current_user.sales.paginate(page: params[:page])
     @items = all.sum(:purchase_count)
-    @purchasers = all.count
+    @purchasers = all.group(:purchaser_name).count
     @gross = all.sum('item_price*purchase_count')
     @count = all.count
   end
 
   # GET /saleew
   def new
-    @sale = Sale.new
+    @sale = current_user.sales.new
   end
 
   # POST /sale
