@@ -1,0 +1,12 @@
+<div class="row">
+  <h3 class="col-6">
+    <span class="fa fa-table "></span> Arquivo
+  </h3>
+  <% if current_page?(action: 'index') %>
+    <div class="col-6 text-right">
+      <a class="btn btn-primary" href="<%= new_sale_path%>" role="button">Importar <span class="fa fa-upload"></span></a>
+    </div>
+  <% end %>
+</div>
+
+<hr>

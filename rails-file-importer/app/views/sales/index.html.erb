@@ -1,0 +1,50 @@
+<%= render 'header'%>
+
+<h4>
+  <span class="badge badge-pill badge-secondary font-weight-normal">
+    Total de vendas:
+    <strong><%= @count %></strong>
+  </span>
+  <span class="badge badge-pill badge-info font-weight-normal">
+    Items vendidos:
+    <strong><%= @items%></strong>
+  </span>
+  <span class="badge badge-pill badge-warning font-weight-normal">
+    Compradores:
+    <strong><%= @purchasers%></strong>
+  </span>
+  <span class="badge badge-pill badge-success font-weight-normal">
+    Receita Bruta:
+    <strong>R$ <%= @gross%></strong>
+  </span>
+</h4>
+
+<table class="table table-striped mt-4 mb-4">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Purcharser name</th>
+      <th scope="col">Item description</th>
+      <th scope="col">Item price(R$)</th>
+      <th scope="col">Purcharse count</th>
+      <th scope="col">Merchant address</th>
+      <th scope="col">Merchant name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr>
+        <td><%= sale.purchaser_name %></td>
+        <td><%= sale.item_description %></td>
+        <td><%= sale.item_price %></td>
+        <td><%= sale.purchase_count %></td>
+        <td><%= sale.merchant_address %></td>
+        <td><%= sale.merchant_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row justify-content-center">
+  <%= will_paginate @saled, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>

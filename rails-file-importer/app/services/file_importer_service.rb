@@ -8,11 +8,11 @@ module FileImporterService
     def importer(params, user)
       @file = params[:file]
       @user = user
-      archives = []
+      sales = []
       CSV.foreach(@file.path, headers: true, col_sep: "\t") do |row|
-        archives << Archive.new(parse(row))
+        sales << Sale.new(parse(row))
       end
-      archives
+      sales
     end
 
     private

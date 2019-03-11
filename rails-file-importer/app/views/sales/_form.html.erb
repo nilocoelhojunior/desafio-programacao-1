@@ -1,0 +1,44 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-7">
+    <p>
+      O documente deve ter as colunas separadas por TAB com as seguintes colunas: purchaser name, item description, item price, purchase count, merchant address, merchant name. As colunas devem sempre estar nesta ordem, sempre com dados e que sempre deve haver uma linha de cabeçalho.
+      <br>
+      <strong>
+        Veja o arquivo de exemplo:
+        <a href="https://raw.githubusercontent.com/myfreecomm/desafio-programacao-1/master/example_input.tab" target="_blank">Arquivo de exemplo</a>
+      </strong>
+    </p>
+  </div>
+  <div class="col-5">
+    <% if alert %>
+      <%= render 'shared/alert', alert_type: 'danger' do %>
+        <%= alert %>
+      <% end %>
+    <% end %>
+
+    <%= form_with(model: sale, local: true) do |form| %>
+      <% if sale.errors.any? %>
+        <%= render 'shared/alert', alert_type: 'danger' do %>
+          <h5><%= pluralize(sale.errors.count, "error") %> proibiram o arquivo de ser importado:</h5>
+
+          <ul>
+            <% sale.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+
+      <div class="field form-group custom-file">
+        <%= form.label "Escolher documento", class: 'custom-file-label', for: 'customFile' %>
+        <%= form.file_field :file, class: 'custom-file-input', id: 'customFile' %>
+      </div>
+
+      <div class="actions mt-4">
+        <button class="btn btn-primary btn-block" type="submit" role="button">
+          Importar <span class="fa fa-upload"></span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
