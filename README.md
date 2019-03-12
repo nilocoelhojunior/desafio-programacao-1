@@ -23,6 +23,7 @@ Acesse a pasta do projeto e instale as dependências
 ```sh
 $ cd ./rails-file-importer
 $ bundle install
+$ rails s
 ```
 
 ### Testes
